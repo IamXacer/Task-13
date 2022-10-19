@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, {useEffect, useState} from 'react'
+import {todolistAPI} from "../api/todolist-api";
 
 export default {
     title: 'API'
@@ -38,7 +39,7 @@ export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         const todolistId= '6ca47a68-8d05-4510-9276-2c64150fbcd7'
-        axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`,settings)
+        todolistAPI.deleteTodolist(todolistId)
             .then((res)=>{
                 setState(res.data)
             })
@@ -49,6 +50,12 @@ export const DeleteTodolist = () => {
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
+        const todolistId= 'ec128c98-8885-4e9b-afaa-aff511ca3447'
+        const title = 'NEST-JS'
+        todolistAPI.updateTodolist(todolistId,title )
+            .then((res)=>{
+                setState(res.data)
+            })
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
